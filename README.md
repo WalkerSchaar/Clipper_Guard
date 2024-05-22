@@ -1,1 +1,1 @@
-![image](https://github.com/WalkerSchaar/Clipper_Guard/assets/132508530/05617115-de3d-495f-857e-768c0a4157dd)
+![image](https://github.com/WalkerSchaar/Clipper_Guard/assets/132508530/b736f078-c29e-4e0d-9feb-736e94e5c0b4)
