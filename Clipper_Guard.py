@@ -24,6 +24,17 @@ def paste_text(event=None):
         # If clipboard is empty or there's an error, show a different message
         pasted_text_label.config(text="PASTED TEXT:\nClipboard is empty or contains unsupported content")
 
+def display_ascii_art():
+    ascii_art = """
+ ______________________________________________________|______________________
+ \_______________________________________CLIPPER_GUARD_|_||_||_||_||_||_||_||_|
+                                                       | 
+"""
+    print(ascii_art)
+
+# Display ASCII art
+display_ascii_art()
+
 # Create the main window
 root = tk.Tk()
 root.title("Clipboard Viewer")
@@ -45,4 +56,4 @@ root.bind('<Control-v>', paste_text)
 root.bind('<Command-v>', paste_text)  # For macOS
 
 # Run the application
-root.mainloop()
+root.mainloop() 
