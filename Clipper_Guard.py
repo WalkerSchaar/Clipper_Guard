@@ -31,7 +31,7 @@ def generate_blinking_text():
     text = "Monitoring"
     while True:
         print(f"\r{text} ", end='', flush=True)  # Print the text
-        time.sleep(1)  # Wait for 1 second
+        time.sleep(2)  # Wait for 1 second
         print(f"\r{' ' * len(text)} ", end='', flush=True)  # Clear the text with spaces
         time.sleep(1)  # Wait for 1 second before blinking again
 
