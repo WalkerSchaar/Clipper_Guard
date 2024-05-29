@@ -8,9 +8,7 @@ def show_clipboard():
         # Update the label with the clipboard content
         copied_text_label.config(text=f"COPIED TEXT:\n{clipboard_content}")
     except tk.TclError:
-        # If clipboard is empty or there's an error, show a different message
-        copied_text_label.config(text="COPIED TEXT:\nClipboard is empty or contains unsupported content")
-
+        
 def paste_text(event=None):
     try:
         # Get the clipboard content and display it as pasted text
