@@ -3,6 +3,8 @@ import threading
 import tkinter as tk
 from tkinter import messagebox
 import win32clipboard
+from PyQt5.QtWidgets import QApplication, QMessageBox
+from PyQt5.QtGui import QClipboard
 
 def display_ascii_art():
     ascii_art = """
@@ -30,23 +32,20 @@ def get_clipboard_content():
         win32clipboard.CloseClipboard()
         return None
 
-def check_clipboard_changes():
-    previous_content = None
+class ClipboardWatcher(QApplication):
+    def __init__(self, argv):
+        super().__init__(argv)
+        self.clipboard = self.clipboard()
+        self.clipboard.dataChanged.connect(self.clipboard_changed)
+        self.previous_clipboard_content = ''
 
-    def clipboard_check():
-        nonlocal previous_content
-        clipboard_content = get_clipboard_content()
-
-        if clipboard_content and clipboard_content != previous_content:
-            print("Clipboard content detected.")
-            if messagebox.askyesno("Alert", "Clipboard content detected. Have you pasted the content?"):
-                empty_clipboard()
-                messagebox.showinfo("Alert", "Clipboard content cleared.")
-            previous_content = clipboard_content
-
-        root.after(1000, clipboard_check)  # Check every second
-
-    clipboard_check()
+    def clipboard_changed(self):
+        clipboard_content = self.clipboard.text()
+        if clipboard_content and self.previous_clipboard_content and clipboard_content != self.previous_clipboard_content:
+            messagebox.showinfo('Clipboard Alert', f'Clipboard content changed to: {clipboard_content}')
+        
+        # Update previous clipboard content
+        self.previous_clipboard_content = clipboard_content
 
 def generate_blinking_text():
     text = "Monitoring"
@@ -66,13 +65,13 @@ if __name__ == "__main__":
     # Empty the clipboard immediately when the script starts
     empty_clipboard()
 
-    # Start checking the clipboard changes
-    check_clipboard_changes()
-
     # Start the blinking text in a separate thread
     blinking_thread = threading.Thread(target=generate_blinking_text)
     blinking_thread.daemon = True
     blinking_thread.start()
 
+    # Start checking the clipboard changes using PyQt5
+    app = ClipboardWatcher([])
+    
     # Run the application
     root.mainloop()
