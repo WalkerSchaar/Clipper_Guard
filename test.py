@@ -43,7 +43,9 @@ class ClipboardWatcher(QApplication):
         clipboard_content = self.clipboard.text()
         if clipboard_content and self.previous_clipboard_content and clipboard_content != self.previous_clipboard_content:
             messagebox.showinfo('Clipboard Alert', f'Clipboard content changed to: {clipboard_content}')
-        
+            # Reset to the beginning
+            self.quit()  # Quit the QApplication event loop to restart
+
         # Update previous clipboard content
         self.previous_clipboard_content = clipboard_content
 
@@ -55,7 +57,7 @@ def generate_blinking_text():
         print(f"\r{' ' * len(text)} ", end='', flush=True)  # Clear the text with spaces
         time.sleep(1)  # Wait for 1 second before blinking again
 
-if __name__ == "__main__":
+def main():
     display_ascii_art()
 
     # Initialize tkinter root
@@ -72,6 +74,10 @@ if __name__ == "__main__":
 
     # Start checking the clipboard changes using PyQt5
     app = ClipboardWatcher([])
-    
+
     # Run the application
-    root.mainloop()
+    app.exec_()  # Start the QApplication event loop
+
+if __name__ == "__main__":
+    while True:
+        main()  # Restart the entire process
