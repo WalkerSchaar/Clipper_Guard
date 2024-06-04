@@ -42,7 +42,15 @@ class ClipboardWatcher(QApplication):
     def clipboard_changed(self):
         clipboard_content = self.clipboard.text()
         if clipboard_content and self.previous_clipboard_content and clipboard_content != self.previous_clipboard_content:
-            messagebox.showinfo('Clipboard Alert', f'Clipboard content changed to: {clipboard_content}')
+            # Create a top-level window to make the message box always on top
+            alert_root = tk.Toplevel()
+            alert_root.withdraw()  # Hide the top-level window
+            alert_root.attributes('-topmost', True)  # Make it always on top
+            alert_root.after(0, lambda: alert_root.focus_force())  # Force focus to this window
+
+            messagebox.showinfo('Clipboard Alert', f'Clipboard content changed to: {clipboard_content}', parent=alert_root)
+            alert_root.destroy()  # Destroy the top-level window after the message box is closed
+            
             # Reset to the beginning
             self.quit()  # Quit the QApplication event loop to restart
 
