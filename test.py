@@ -40,7 +40,7 @@ class ClipboardWatcher(QApplication):
             alert_root.attributes('-topmost', True)  # Make it always on top
             alert_root.after(0, lambda: alert_root.focus_force())  # Force focus to this window
 
-            messagebox.showinfo('Clipboard Alert', f'Clipboard content changed to: {clipboard_content}', parent=alert_root)
+            messagebox.showinfo("Clipboard Alert", f"Your clipboard's content was changed to: {clipboard_content}. Check your system for clipper malware.", parent=alert_root)
             alert_root.destroy()  # Destroy the top-level window after the message box is closed
             
             # Reset to the beginning
