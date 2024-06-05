@@ -3,6 +3,8 @@ import threading
 import tkinter as tk
 from tkinter import messagebox
 import win32clipboard
+import pyperclip
+import keyboard
 from PyQt5.QtWidgets import QApplication, QMessageBox
 from PyQt5.QtGui import QClipboard
 
@@ -21,16 +23,6 @@ def empty_clipboard():
         win32clipboard.CloseClipboard()
     except:
         win32clipboard.CloseClipboard()
-
-def get_clipboard_content():
-    try:
-        win32clipboard.OpenClipboard()
-        content = win32clipboard.GetClipboardData()
-        win32clipboard.CloseClipboard()
-        return content
-    except TypeError:
-        win32clipboard.CloseClipboard()
-        return None
 
 class ClipboardWatcher(QApplication):
     def __init__(self, argv):
@@ -65,6 +57,10 @@ def generate_blinking_text():
         print(f"\r{' ' * len(text)} ", end='', flush=True)  # Clear the text with spaces
         time.sleep(1)  # Wait for 1 second before blinking again
 
+def clear_clipboard():
+    # Clear the clipboard after paste
+    pyperclip.copy("")
+
 def main():
     display_ascii_art()
 
@@ -87,5 +83,9 @@ def main():
     app.exec_()  # Start the QApplication event loop
 
 if __name__ == "__main__":
+    # Detect the paste command (Ctrl+V) and clear clipboard
+    keyboard.add_hotkey('ctrl+v', clear_clipboard)
+
+    # Run the main loop
     while True:
         main()  # Restart the entire process
