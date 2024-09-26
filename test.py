@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QApplication, QMessageBox
 from PyQt5.QtGui import QClipboard
 
 def display_ascii_art():
-    ascii_art = """
+    ascii_art = r"""
  ___________________________________________________________|______________________
  \____________________________________________CLIPPER_GUARD_|_||_||_||_||_||_||_||_|
                                                             | 
