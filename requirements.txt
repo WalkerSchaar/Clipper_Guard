@@ -1,0 +1,4 @@
+pyperclip
+keyboard
+PyQt5
+pywin32
