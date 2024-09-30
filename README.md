@@ -4,6 +4,8 @@ Clipper Guard implements logic that restricts the user's clipboard to a single-u
 
 ***DESIGNED FOR WINDOWS COMPUTERS - ANY OTHER SYSTEM WONT RUN***
 
+
+
 **INSTALLATION**
 git clone https://github.com/WalkerSchaar/Clipper_Guard.git
 
@@ -12,6 +14,9 @@ cd Clipper_Guard
 pip install -r requirements.txt
 
 python Clipper_Guard.py
+
+
+
 
 **CONVERT TO AN EXECUTABLE**
 pip install pyinstaller
