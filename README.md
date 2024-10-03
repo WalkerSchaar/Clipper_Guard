@@ -25,7 +25,8 @@ pip install pyinstaller
 
 cd path\to\your\Glipper_Guard
 
-pyinstaller --onefile Clipper_Guard.py
+pyinstaller --onefile --icon=path\to\icon.ico Clipper_Guard.py
+
 
 *It's highly recommended to rename your exe to a custome file name. This can help prevent clippers from finding and killing a running instance.* 
 
